@@ -34,10 +34,13 @@
         <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
         <jetbrains.annotation.version>26.0.2-1</jetbrains.annotation.version>
         <lombok.version>1.18.42</lombok.version>
+        
         <apache.log4j.version>2.23.1</apache.log4j.version>
         <slf4j-api.version>2.0.17</slf4j-api.version>
-
-        <junit.jupiter.version>6.0.0</junit.jupiter.version>
+        <slfj-simple.version>1.7.30</slfj-simple.version>
+        
+        <junit-jupiter.version>6.0.0</junit-jupiter.version>
+        <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <mockito-core.version>5.20.0</mockito-core.version>
 
         <mockito-junit-jupiter.version>5.19.0</mockito-junit-jupiter.version>
@@ -324,22 +327,35 @@
                 <version>${slf4j-api.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slfj-simple.version}</version>
+            </dependency>
+            
             <!-- Dependencies for testing only -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit.jupiter.version}</version>
+                <version>${junit-jupiter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit.jupiter.version}</version>
+                <version>${junit-jupiter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>${junit.jupiter.version}</version>
+                <version>${junit-jupiter.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.junit-pioneer</groupId>
+                <artifactId>junit-pioneer</artifactId>
+                <version>${junit-pioneer.version}</version>
+            </dependency>
+            
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
@@ -355,6 +371,7 @@
                 <artifactId>logcaptor</artifactId>
                 <version>${logcaptor.version}</version>
             </dependency>
+            
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
