@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon.oss</groupId>
     <artifactId>boms</artifactId>
-    <version>1.25.1</version>
+    <version>1.25.2</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -16,40 +16,41 @@
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
 
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
-        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
-        <maven-artifact-plugin.version>3.6.0</maven-artifact-plugin.version>
-        <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
-        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
+        <maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <maven-artifact-plugin.version>3.6.1</maven-artifact-plugin.version>
+        <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven.compiler.proc>full</maven.compiler.proc>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
-        <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
-        <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
+        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <versions-maven-plugin.version>2.20.1</versions-maven-plugin.version>
 
 
-        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
-        <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
+        <sonar-maven-plugin.version>5.5.0.6536</sonar-maven-plugin.version>
         <jetbrains.annotation.version>26.0.2-1</jetbrains.annotation.version>
         <lombok.version>1.18.42</lombok.version>
         
-        <apache.log4j.version>2.23.1</apache.log4j.version>
+        <apache.log4j.version>2.25.3</apache.log4j.version>
         <slf4j-api.version>2.0.17</slf4j-api.version>
         <slfj-simple.version>1.7.30</slfj-simple.version>
         
         <junit-jupiter.version>6.0.0</junit-jupiter.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <mockito-core.version>5.20.0</mockito-core.version>
+        <mockito-core.version>5.21.0</mockito-core.version>
 
-        <mockito-junit-jupiter.version>5.19.0</mockito-junit-jupiter.version>
+        <mockito-junit-jupiter.version>5.21.0</mockito-junit-jupiter.version>
         <logcaptor.version>2.12.1</logcaptor.version>
         <assertj-core.version>3.27.3</assertj-core.version>
 
         <picocli.verions>4.7.7</picocli.verions>
 
-
+        <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
+        <logback-core.version>1.5.23</logback-core.version>
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <sonar.organization>oberon-oss-eu</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -380,6 +381,14 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!-- CVE related dependency overrides -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-core.version}</version>
+        </dependency>
+        <!-- END of CVE related dependency overrides -->
+        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
