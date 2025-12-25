@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon.oss</groupId>
     <artifactId>boms</artifactId>
-    <version>1.25.2</version>
+    <version>1.25.3</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -296,10 +296,16 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation-api.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>info.picocli</groupId>
                 <artifactId>picocli</artifactId>
                 <version>${picocli.verions}</version>
             </dependency>
+            
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
