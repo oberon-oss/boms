@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon.oss</groupId>
     <artifactId>boms</artifactId>
-    <version>1.25.3</version>
+    <version>1.25.4</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -31,7 +31,7 @@
 
 
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
-        <sonar-maven-plugin.version>5.5.0.6536</sonar-maven-plugin.version>
+        <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
         <jetbrains.annotation.version>26.0.2-1</jetbrains.annotation.version>
         <lombok.version>1.18.42</lombok.version>
         
