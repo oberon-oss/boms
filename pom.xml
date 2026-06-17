@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.1</version>
+    <version>3.25.2</version>
     <packaging>pom</packaging>
 
     <name>Oberon OSS BOMs</name>
