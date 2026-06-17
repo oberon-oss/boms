@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-      - bom-21
-      - bom-25
+      - 'feature/**'
+      - 'bugfix/**'
   workflow_dispatch:
 
 jobs:
