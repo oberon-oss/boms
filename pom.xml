@@ -9,43 +9,10 @@
     <version>3.25.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>central</id>
-            <name>Central Portal Snapshots</name>
-            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <name>Oberon OSS BOMs</name>
-    <description>Bill of materials for Oberon OSS projects.</description>
-    <url>https://github.com/oberon-oss/boms</url>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>oberon-oss</id>
-            <name>TigerLilly64</name>
-            <url>https://github.com/oberon-oss</url>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/oberon-oss/boms.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/oberon-oss/boms.git</developerConnection>
-        <url>https://github.com/oberon-oss/boms</url>
-        <tag>HEAD</tag>
-    </scm>
-
-
     <properties>
+        <github-organization-name>oberon-oss</github-organization-name>
+        <argLine/>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
         <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
@@ -70,7 +37,7 @@
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
         <jetbrains.annotation.version>26.0.2-1</jetbrains.annotation.version>
-        <lombok.version>1.18.44</lombok.version>
+        <lombok.version>1.18.46</lombok.version>
 
         <slf4j-api.version>2.0.17</slf4j-api.version>
 
@@ -86,10 +53,68 @@
 
         <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
 
+        <github-organization-name>oberon-oss</github-organization-name>
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
-        <sonar.organization>oberon-oss-eu</sonar.organization>
+        <sonar.organization>${github-organization-name}-eu</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <argLine/>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>central-snapshots</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>central</id>
+            <name>Central Portal Snapshots</name>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <name>Oberon OSS BOMs</name>
+    <description>Bill of materials for Oberon OSS projects.</description>
+    <url>https://github.com/oberon-oss/boms</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Oberon OSS</name>
+        <url>https://github.com/${github-organization-name}</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>TigerLilly64</id>
+            <name>TigerLilly64</name>
+            <email>info@oberon-oss.eu</email>
+            <organization>Oberon OSS</organization>
+            <organizationUrl>https://github.com/${github-organization-name}</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/oberon-oss/boms.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/oberon-oss/boms.git</developerConnection>
+        <url>https://github.com/oberon-oss/boms</url>
+        <tag>HEAD</tag>
+    </scm>
+
 
     <build>
         <pluginManagement>
@@ -222,6 +247,7 @@
                         @{argLine}
                         -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito-core.version}/mockito-core-${mockito-core.version}.jar
                         -Xshare:off
+                        --sun-misc-unsafe-memory-access=allow
                     </argLine>
                 </configuration>
             </plugin>
@@ -394,7 +420,7 @@
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>${junit-jupiter.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -422,7 +448,7 @@
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito-junit-jupiter.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>io.github.hakky54</groupId>
                 <artifactId>logcaptor</artifactId>
@@ -436,7 +462,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -454,13 +480,13 @@
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
