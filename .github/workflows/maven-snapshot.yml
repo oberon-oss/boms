@@ -18,7 +18,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Read Maven project version
+        id: project
+        run: echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_OUTPUT"
+
+      - name: Skip non-SNAPSHOT version
+        if: ${{ !endsWith(steps.project.outputs.version, '-SNAPSHOT') }}
+        run: echo "Project version '${{ steps.project.outputs.version }}' is not a SNAPSHOT; skipping snapshot deployment."
+
+
       - uses: actions/setup-java@v4
+        if: endsWith(steps.project.outputs.version, '-SNAPSHOT')
         with:
           java-version: '25'
           distribution: 'temurin'
@@ -27,6 +37,7 @@ jobs:
           server-password: CENTRAL_PASSWORD
 
       - name: Publish SNAPSHOT
+        if: endsWith(steps.project.outputs.version, '-SNAPSHOT')
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
