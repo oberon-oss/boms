@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.3</version>
+    <version>3.25.4</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -95,11 +95,12 @@
         </developer>
     </developers>
 
-    <scm>
-        <connection>scm:git:https://github.com/oberon-oss/boms.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/oberon-oss/boms.git</developerConnection>
-        <url>https://github.com/oberon-oss/boms</url>
-        <tag>HEAD</tag>
+    <scm child.scm.connection.inherit.append.path="false"
+         child.scm.developerConnection.inherit.append.path="false"
+         child.scm.url.inherit.append.path="false">
+        <connection>scm:git:https://github.com/oberon-oss/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/oberon-oss/${project.artifactId}.git</developerConnection>
+        <url>https://github.com/oberon-oss/${project.artifactId}</url>
     </scm>
 
 
