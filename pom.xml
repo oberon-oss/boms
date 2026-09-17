@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.4</version>
+    <version>3.25.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -18,35 +18,34 @@
         <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
 
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
-        <maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
-        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
-        <maven-artifact-plugin.version>3.6.1</maven-artifact-plugin.version>
+        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+        <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
+        <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
+        <maven-artifact-plugin.version>3.7.0</maven-artifact-plugin.version>
         <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
-        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
         <maven.compiler.proc>full</maven.compiler.proc>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
-        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <versions-maven-plugin.version>2.20.1</versions-maven-plugin.version>
-        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
-        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
+        <versions-maven-plugin.version>2.22.0</versions-maven-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
 
-        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
-        <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
-        <jetbrains.annotation.version>26.0.2-1</jetbrains.annotation.version>
-        <lombok.version>1.18.46</lombok.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
+        <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
+        <jetbrains.annotation.version>26.1.0</jetbrains.annotation.version>
+        <lombok.version>1.18.48</lombok.version>
 
-        <slf4j-api.version>2.0.17</slf4j-api.version>
+        <slf4j-api.version>2.0.19</slf4j-api.version>
 
-        <junit-jupiter.version>6.1.0</junit-jupiter.version>
+        <junit-jupiter.version>6.1.3</junit-jupiter.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <mockito-core.version>5.21.0</mockito-core.version>
+        <mockito-core.version>5.23.0</mockito-core.version>
 
-        <mockito-junit-jupiter.version>5.21.0</mockito-junit-jupiter.version>
-        <logcaptor.version>2.12.6</logcaptor.version>
+        <mockito-junit-jupiter.version>5.23.0</mockito-junit-jupiter.version>
+        <logcaptor.version>2.12.7</logcaptor.version>
         <assertj-core.version>3.27.7</assertj-core.version>
 
         <picocli.verions>4.7.7</picocli.verions>
@@ -70,7 +69,7 @@
 
     <name>Oberon OSS BOMs</name>
     <description>Bill of materials for Oberon OSS projects.</description>
-    <url>https://github.com/oberon-oss/boms</url>
+    <url>https://github.com/oberon-oss/${project.artifactId}</url>
 
     <licenses>
         <license>
@@ -452,11 +451,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
