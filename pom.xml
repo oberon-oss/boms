@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.5</version>
+    <version>3.25.6</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -69,7 +69,7 @@
 
     <name>Oberon OSS BOMs</name>
     <description>Bill of materials for Oberon OSS projects.</description>
-    <url>https://github.com/oberon-oss/${project.artifactId}</url>
+    <url>https://github.com/${github-organization-name}</url>
 
     <licenses>
         <license>
