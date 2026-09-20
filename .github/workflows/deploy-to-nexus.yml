@@ -1,9 +1,10 @@
 name: CI/CD Pipeline
 
 on:
-  create:
-    tags:
-  workflow_dispatch:
+    push:
+        tags:
+            - 'v\d+.d\+.\d+' # Alternatively, use a specific pattern if desired
+    workflow_dispatch:
 
 jobs:
   deploy:
