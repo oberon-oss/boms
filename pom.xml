@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.7</version>
+    <version>3.25.8</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -53,6 +53,8 @@
         <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
 
         <github-organization-name>oberon-oss</github-organization-name>
+
+
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <sonar.organization>${github-organization-name}-eu</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -316,31 +318,35 @@
                     <url>https://nexus.oberon-oss.eu/repository/maven-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
-            <repositories>
-                <repository>
-                    <id>nexus-releases</id>
-                    <name>Nexus Release Repository</name>
-                    <url>https://nexus.oberon-oss.eu/repository/maven-releases/</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </repository>
-
-                <repository>
-                    <id>nexus-snapshots</id>
-                    <url>https://nexus.oberon-oss.eu/repository/maven-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-
-            </repositories>
+        </profile>
+        <profile>
+            <id>jacoco</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${jacoco-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
             <id>central-release</id>
