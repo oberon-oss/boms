@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.9</version>
+    <version>3.25.10</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -61,14 +61,6 @@
         <argLine/>
     </properties>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>central</id>
-            <name>Central Portal Snapshots</name>
-            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <name>Oberon OSS BOMs</name>
     <description>Bill of materials for Oberon OSS projects.</description>
     <url>https://github.com/${github-organization-name}</url>
@@ -103,7 +95,6 @@
         <developerConnection>scm:git:ssh://git@github.com/oberon-oss/${project.artifactId}.git</developerConnection>
         <url>https://github.com/oberon-oss/${project.artifactId}</url>
     </scm>
-
 
     <build>
         <pluginManagement>
@@ -370,6 +361,21 @@
                     <id>nexus-repository</id>
                     <name>Nexus Snapshot Repository</name>
                     <url>https://nexus.oberon-oss.eu/repository/maven-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>activate-maven-central</id>
+            <distributionManagement>
+                <repository>
+                    <id>central</id>
+                    <name>maven central-releases</name>
+                    <url>https://repo1.maven.org/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>central</id>
+                    <name>maven-central-snapshots</name>
+                    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
