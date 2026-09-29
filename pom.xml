@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.10</version>
+    <version>3.25.11</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -63,7 +63,7 @@
 
     <name>Oberon OSS BOMs</name>
     <description>Bill of materials for Oberon OSS projects.</description>
-    <url>https://github.com/${github-organization-name}</url>
+    <url>https://github.com/oberon-oss/boms</url>
 
     <licenses>
         <license>
@@ -95,6 +95,13 @@
         <developerConnection>scm:git:ssh://git@github.com/oberon-oss/${project.artifactId}.git</developerConnection>
         <url>https://github.com/oberon-oss/${project.artifactId}</url>
     </scm>
+
+    <distributionManagement>
+        <site child.site.url.inherit.append.path="false">
+            <id>site</id>
+            <url>https://oberon-oss.github.io/boms</url>
+        </site>
+    </distributionManagement>
 
     <build>
         <pluginManagement>
@@ -293,25 +300,40 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>nexus-release-repository</id>
+            <name>Nexus Release Repository</name>
+            <url>https://nexus.oberon-oss.eu/repository/maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-snapshot-repository</id>
+            <name>Nexus Release Repository</name>
+            <url>https://nexus.oberon-oss.eu/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <!-- Profiles -->
     <profiles>
         <profile>
             <id>include-git-commit-data</id>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>eu.oberon-oss.tools</groupId>
-                        <artifactId>git-commit-in-log</artifactId>
-                        <version>${git-commit-in-log.version}</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
             <dependencies>
                 <dependency>
                     <groupId>eu.oberon-oss.tools</groupId>
                     <artifactId>git-commit-in-log</artifactId>
+                    <version>${git-commit-in-log.version}</version>
                 </dependency>
             </dependencies>
             <build>
@@ -584,6 +606,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>eu.oberon-oss.tools</groupId>
+            <artifactId>git-commit-in-log</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
