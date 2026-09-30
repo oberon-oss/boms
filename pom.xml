@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.11</version>
+    <version>3.25.12</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -32,7 +32,8 @@
         <versions-maven-plugin.version>2.22.0</versions-maven-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
-
+        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
         <jetbrains.annotation.version>26.1.0</jetbrains.annotation.version>
@@ -99,7 +100,7 @@
     <distributionManagement>
         <site child.site.url.inherit.append.path="false">
             <id>site</id>
-            <url>https://oberon-oss.github.io/boms</url>
+            <url>https://oberon-oss.github.io/${project.artifactId}</url>
         </site>
     </distributionManagement>
 
@@ -327,6 +328,23 @@
 
     <!-- Profiles -->
     <profiles>
+        <profile>
+            <id>site</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>${maven-site-plugin.version}</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>${maven-project-info-reports-plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>include-git-commit-data</id>
             <dependencies>
