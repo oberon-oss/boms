@@ -574,6 +574,11 @@
                 <version>${slf4j-api.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>eu.oberon-oss.tools</groupId>
+                <artifactId>git-commit-in-log</artifactId>
+                <version>${git-commit-in-log.version}</version>
+            </dependency>
             <!-- Dependencies for testing only -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
