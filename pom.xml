@@ -98,6 +98,16 @@
     </scm>
 
     <distributionManagement>
+        <repository>
+            <id>nexus-repository</id>
+            <name>Nexus Release Repository</name>
+            <url>https://nexus.oberon-oss.eu/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-repository</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>https://nexus.oberon-oss.eu/repository/maven-snapshots/</url>
+        </snapshotRepository>
         <site child.site.url.inherit.append.path="false">
             <id>site</id>
             <url>https://oberon-oss.github.io/${project.artifactId}</url>
