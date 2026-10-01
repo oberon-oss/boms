@@ -24,4 +24,4 @@ jobs:
           server-username: NEXUS_USERNAME
           server-password: NEXUS_PASSWORD
       - name: Publish Artifacts to Nexus
-        run: mvn deploy
+        run: mvn deploy site -Psite
