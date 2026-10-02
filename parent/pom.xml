@@ -7,7 +7,7 @@
     <parent>
         <groupId>eu.oberon-oss</groupId>
         <artifactId>boms</artifactId>
-        <version>4.25.0</version>
+        <version>4.25.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -19,7 +19,7 @@
     <url>https://github.com/oberon-oss/boms</url>
 
     <properties>
-        <bom.version>4.25.0</bom.version>
+        <bom.version>4.25.1</bom.version>
         <lombok.version>1.18.48</lombok.version>
         <mockito-core.version>5.23.0</mockito-core.version>
         <git-commit-in-log.version>1.0.1</git-commit-in-log.version>

@@ -7,7 +7,7 @@
     <parent>
         <groupId>eu.oberon-oss</groupId>
         <artifactId>boms</artifactId>
-        <version>4.25.0</version>
+        <version>4.25.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -26,22 +26,34 @@
 
         <slf4j-api.version>2.0.19</slf4j-api.version>
         <ch-qos-logback.version>1.6.3</ch-qos-logback.version>
+        <jackson-databind.version>3.2.3</jackson-databind.version>
 
         <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
+
+        <!-- testing dependencies -->
         <junit-jupiter.version>6.1.3</junit-jupiter.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <mockito-core.version>5.23.0</mockito-core.version>
         <mockito-junit-jupiter.version>5.23.0</mockito-junit-jupiter.version>
-        <assertj-core.version>3.27.7</assertj-core.version>
 
+        <byte-buddy.version>1.17.7</byte-buddy.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
         <logcaptor.version>2.12.7</logcaptor.version>
 
-
-        <jackson-databind.version>3.2.3</jackson-databind.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>${byte-buddy.version}</version>
+            </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
