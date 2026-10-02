@@ -6,17 +6,17 @@
 
     <parent>
         <groupId>eu.oberon-oss</groupId>
-        <artifactId>boms</artifactId>
-        <version>4.25.1</version>
+        <artifactId>project-settings</artifactId>
+        <version>4.25.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>bom</artifactId>
+    <artifactId>project-settings-bom</artifactId>
     <packaging>pom</packaging>
 
     <name>Oberon OSS BOM</name>
     <description>Bill of materials for Oberon OSS projects.</description>
-    <url>https://github.com/oberon-oss/boms</url>
+    <url>https://github.com/oberon-oss/project-settings</url>
 
     <properties>
         <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
@@ -28,8 +28,6 @@
         <ch-qos-logback.version>1.6.3</ch-qos-logback.version>
         <jackson-databind.version>3.2.3</jackson-databind.version>
 
-        <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
-
         <!-- testing dependencies -->
         <junit-jupiter.version>6.1.3</junit-jupiter.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
@@ -39,6 +37,7 @@
         <byte-buddy.version>1.17.7</byte-buddy.version>
         <assertj-core.version>3.27.7</assertj-core.version>
         <logcaptor.version>2.12.7</logcaptor.version>
+        <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
 
     </properties>
 

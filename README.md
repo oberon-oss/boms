@@ -1,4 +1,4 @@
-# Oberon OSS BOMs
+# Oberon OSS project-settings
 
 Bill of Materials (BOM) and parent POM for **Oberon OSS** Java projects.
 
@@ -20,17 +20,17 @@ This project provides two distinct artifacts:
 
 ### 1. As a Parent POM (Recommended for Oberon OSS projects)
 
-Inheriting from `parent` provides complete build orchestration, including pre-configured compiler settings (Java 25,
+Inheriting from `project-settings-parent` provides complete build orchestration, including pre-configured compiler settings (Java 25,
 Lombok annotation processing), standard testing frameworks (JUnit 5, Mockito, AssertJ), code coverage (JaCoCo),
-repository distribution management, and automatically imports the `bom`.
+repository distribution management, and automatically imports `project-settings-bom`.
 
 Add the following to your `pom.xml`:
 
 ```xml
 <parent>
     <groupId>eu.oberon-oss</groupId>
-    <artifactId>parent</artifactId>
-    <version>4.25.1</version>
+    <artifactId>project-settings-parent</artifactId>
+    <version>4.25.2</version>
 </parent>
 ```
 
@@ -38,7 +38,7 @@ Add the following to your `pom.xml`:
 
 - **Default Dependencies**: Automatically includes `org.jetbrains:annotations` (compile) and standard test dependencies
   (`junit-jupiter`, `mockito-core`, `mockito-junit-jupiter`, `assertj-core`).
-- **Dependency Management**: Automatically imports `eu.oberon-oss:bom`.
+- **Dependency Management**: Automatically imports `eu.oberon-oss:project-settings-bom`.
 - **Compiler Configuration**: Configured for Java 25 source/target with Lombok annotation processor path enabled.
 - **Surefire / Test Runner**: Pre-configured with Mockito Java agent and JVM flags (`-Xshare:off`,
   `--sun-misc-unsafe-memory-access=allow`).
@@ -49,7 +49,7 @@ Add the following to your `pom.xml`:
 
 ### 2. As an Imported BOM (Dependency Management)
 
-If you only want to align dependency versions without inheriting build plugins and parent configuration, import `bom`
+If you only want to align dependency versions without inheriting build plugins and parent configuration, import `project-settings-bom`
 into your `<dependencyManagement>` section:
 
 ```xml
@@ -57,8 +57,8 @@ into your `<dependencyManagement>` section:
     <dependencies>
         <dependency>
             <groupId>eu.oberon-oss</groupId>
-            <artifactId>bom</artifactId>
-            <version>4.25.1</version>
+            <artifactId>project-settings-bom</artifactId>
+            <version>4.25.2</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -105,14 +105,14 @@ The repository is organized as a multi-module Maven project providing two distin
 
 | Artifact | Maven Coordinates | Purpose & Contents |
 |:---------|:------------------|:-------------------|
-| **BOM** | `eu.oberon-oss:bom` | Standalone Bill of Materials providing library version management via `<dependencyManagement>`. |
-| **Parent POM** | `eu.oberon-oss:parent` | Complete project parent providing build lifecycle plugins, compiler configuration, test agents, default dependencies, and automatic BOM import. |
+| **BOM** | `eu.oberon-oss:project-settings-bom` | Standalone Bill of Materials providing library version management via `<dependencyManagement>`. |
+| **Parent POM** | `eu.oberon-oss:project-settings-parent` | Complete project parent providing build lifecycle plugins, compiler configuration, test agents, default dependencies, and automatic BOM import. |
 
 ---
 
 ## Managed Dependencies
 
-The `eu.oberon-oss:bom` artifact manages versions for commonly used libraries across Oberon OSS projects:
+The `eu.oberon-oss:project-settings-bom` artifact manages versions for commonly used libraries across Oberon OSS projects:
 
 | Category            | Artifact                                    | Description                                            |
 |:--------------------|:--------------------------------------------|:-------------------------------------------------------|
@@ -133,7 +133,7 @@ The `eu.oberon-oss:bom` artifact manages versions for commonly used libraries ac
 
 ## Managed Plugins & Build Configuration
 
-The `eu.oberon-oss:parent` POM (backed by root `<pluginManagement>`) configures essential build plugins:
+The `eu.oberon-oss:project-settings-parent` POM (backed by root `<pluginManagement>`) configures essential build plugins:
 
 - **Compiler**: `maven-compiler-plugin` configured for Java 25 with Lombok annotation processor path enabled.
 - **Testing**: `maven-surefire-plugin` with Mockito agent attachments and JVM execution flags (`-Xshare:off`, `--sun-misc-unsafe-memory-access=allow`).

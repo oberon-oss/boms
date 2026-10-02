@@ -6,30 +6,29 @@
 
     <parent>
         <groupId>eu.oberon-oss</groupId>
-        <artifactId>boms</artifactId>
-        <version>4.25.1</version>
+        <artifactId>project-settings</artifactId>
+        <version>4.25.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>parent</artifactId>
+    <artifactId>project-settings-parent</artifactId>
     <packaging>pom</packaging>
 
     <name>Oberon OSS Parent POM</name>
     <description>Parent POM for Oberon OSS projects.</description>
-    <url>https://github.com/oberon-oss/boms</url>
+    <url>https://github.com/oberon-oss/project-settings</url>
 
     <properties>
-        <bom.version>4.25.1</bom.version>
+        <bom.version>4.25.2</bom.version>
         <lombok.version>1.18.48</lombok.version>
         <mockito-core.version>5.23.0</mockito-core.version>
-        <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>eu.oberon-oss</groupId>
-                <artifactId>bom</artifactId>
+                <artifactId>project-settings-bom</artifactId>
                 <version>${bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -38,10 +37,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>eu.oberon-oss.tools</groupId>
-            <artifactId>git-commit-in-log</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
@@ -171,7 +166,6 @@
                 <dependency>
                     <groupId>eu.oberon-oss.tools</groupId>
                     <artifactId>git-commit-in-log</artifactId>
-                    <version>${git-commit-in-log.version}</version>
                 </dependency>
             </dependencies>
             <build>

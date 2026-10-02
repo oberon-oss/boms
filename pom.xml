@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.oberon-oss</groupId>
-    <artifactId>boms</artifactId>
-    <version>4.25.1</version>
+    <artifactId>project-settings</artifactId>
+    <version>4.25.2</version>
     <packaging>pom</packaging>
 
-    <name>Oberon OSS BOMs</name>
+    <name>Oberon OSS project-settings</name>
     <description>Root aggregator and parent for Oberon OSS BOM and Parent POM.</description>
-    <url>https://github.com/oberon-oss/boms</url>
+    <url>https://github.com/oberon-oss/project-settings</url>
 
     <modules>
-        <module>bom</module>
-        <module>parent</module>
+        <module>project-settings-bom</module>
+        <module>project-settings-parent</module>
     </modules>
 
     <properties>
@@ -96,7 +96,7 @@
         </snapshotRepository>
         <site>
             <id>site</id>
-            <url>https://oberon-oss.github.io/boms/</url>
+            <url>https://oberon-oss.github.io/project-settings/</url>
         </site>
     </distributionManagement>
 
