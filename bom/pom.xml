@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eu.oberon-oss</groupId>
+        <artifactId>boms</artifactId>
+        <version>4.25.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>bom</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Oberon OSS BOM</name>
+    <description>Bill of materials for Oberon OSS projects.</description>
+    <url>https://github.com/oberon-oss/boms</url>
+
+    <properties>
+        <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
+        <picocli.version>4.7.7</picocli.version>
+        <lombok.version>1.18.48</lombok.version>
+        <jetbrains.annotation.version>26.1.0</jetbrains.annotation.version>
+
+        <slf4j-api.version>2.0.19</slf4j-api.version>
+        <ch-qos-logback.version>1.6.3</ch-qos-logback.version>
+
+        <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
+        <junit-jupiter.version>6.1.3</junit-jupiter.version>
+        <junit-pioneer.version>2.3.0</junit-pioneer.version>
+        <mockito-core.version>5.23.0</mockito-core.version>
+        <mockito-junit-jupiter.version>5.23.0</mockito-junit-jupiter.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
+
+        <logcaptor.version>2.12.7</logcaptor.version>
+
+
+        <jackson-databind.version>3.2.3</jackson-databind.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${ch-qos-logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.picocli</groupId>
+                <artifactId>picocli</artifactId>
+                <version>${picocli.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jetbrains.annotation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.oberon-oss.tools</groupId>
+                <artifactId>git-commit-in-log</artifactId>
+                <version>${git-commit-in-log.version}</version>
+            </dependency>
+
+            <!-- Dependencies for testing only -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit-pioneer</groupId>
+                <artifactId>junit-pioneer</artifactId>
+                <version>${junit-pioneer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito-junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.hakky54</groupId>
+                <artifactId>logcaptor</artifactId>
+                <version>${logcaptor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

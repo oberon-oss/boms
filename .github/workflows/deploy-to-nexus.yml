@@ -37,8 +37,11 @@ jobs:
           server-username: NEXUS_USERNAME
           server-password: NEXUS_PASSWORD
 
-      - name: Build Site and Deploy Artifacts
-        run: mvn clean deploy site -Psite
+      - name: Build, Verify and Stage Site
+        run: mvn clean verify site site:stage -Psite
+
+      - name: Deploy Artifacts to Nexus
+        run: mvn deploy -DskipTests
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -46,7 +49,7 @@ jobs:
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'target/site'
+          path: 'target/staging'
 
       - name: Deploy to GitHub Pages
         id: deployment

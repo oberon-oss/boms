@@ -6,8 +6,17 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>boms</artifactId>
-    <version>3.25.13</version>
+    <version>4.25.0</version>
     <packaging>pom</packaging>
+
+    <name>Oberon OSS BOMs</name>
+    <description>Root aggregator and parent for Oberon OSS BOM and Parent POM.</description>
+    <url>https://github.com/oberon-oss/boms</url>
+
+    <modules>
+        <module>bom</module>
+        <module>parent</module>
+    </modules>
 
     <properties>
         <github-organization-name>oberon-oss</github-organization-name>
@@ -17,6 +26,7 @@
         <maven.compiler.release>25</maven.compiler.release>
         <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
+        <maven.compiler.proc>full</maven.compiler.proc>
 
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
@@ -24,47 +34,23 @@
         <maven-artifact-plugin.version>3.7.0</maven-artifact-plugin.version>
         <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
         <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
-        <maven.compiler.proc>full</maven.compiler.proc>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <versions-maven-plugin.version>2.22.0</versions-maven-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
-        <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
+        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
+
+        <versions-maven-plugin.version>2.22.0</versions-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
-        <jetbrains.annotation.version>26.1.0</jetbrains.annotation.version>
-        <lombok.version>1.18.48</lombok.version>
-
-        <slf4j-api.version>2.0.19</slf4j-api.version>
-
-        <junit-jupiter.version>6.1.3</junit-jupiter.version>
-        <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <mockito-core.version>5.23.0</mockito-core.version>
-
-        <mockito-junit-jupiter.version>5.23.0</mockito-junit-jupiter.version>
-        <logcaptor.version>2.12.7</logcaptor.version>
-        <assertj-core.version>3.27.7</assertj-core.version>
-
-        <picocli.verions>4.7.7</picocli.verions>
-
-        <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
         <git-commit-id-maven-plugin.version>10.0.1</git-commit-id-maven-plugin.version>
-        <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
 
-        <github-organization-name>oberon-oss</github-organization-name>
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <sonar.organization>${github-organization-name}-eu</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <argLine/>
     </properties>
-
-    <name>Oberon OSS BOMs</name>
-    <description>Bill of materials for Oberon OSS projects.</description>
-    <url>https://github.com/oberon-oss/boms</url>
 
     <licenses>
         <license>
@@ -230,62 +216,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>properties</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <!--suppress UnresolvedMavenProperty -->
-                    <argLine>
-                        @{argLine}
-                        -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito-core.version}/mockito-core-${mockito-core.version}.jar
-                        -Xshare:off
-                        --sun-misc-unsafe-memory-access=allow
-                    </argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <delimiters>
-                        <delimiter>@</delimiter>
-                    </delimiters>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
 
@@ -356,47 +286,6 @@
             </build>
         </profile>
         <profile>
-            <id>include-git-commit-data</id>
-            <dependencies>
-                <dependency>
-                    <groupId>eu.oberon-oss.tools</groupId>
-                    <artifactId>git-commit-in-log</artifactId>
-                    <version>${git-commit-in-log.version}</version>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.github.git-commit-id</groupId>
-                        <artifactId>git-commit-id-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>get-the-git-infos</id>
-                                <goals>
-                                    <goal>revision</goal>
-                                </goals>
-                                <phase>initialize</phase>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
-                            <!-- Specify only the properties that provide actual value to your application -->
-                            <includeOnlyProperties>
-                                <includeOnlyProperty>^git\.build\.time$</includeOnlyProperty>
-                                <includeOnlyProperty>^git\.build\.version$</includeOnlyProperty>
-                                <includeOnlyProperty>^git\.commit\.id\.(abbrev|full)$</includeOnlyProperty>
-                                <includeOnlyProperty>^git\.commit\.time$</includeOnlyProperty>
-                                <includeOnlyProperty>^git\.branch$</includeOnlyProperty>
-                                <includeOnlyProperty>^git\.tags$</includeOnlyProperty>
-                            </includeOnlyProperties>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>activate-oberon-nexus</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -430,35 +319,6 @@
             </distributionManagement>
         </profile>
         <profile>
-            <id>jacoco</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>${jacoco-maven-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>report</id>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>report</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>central-release</id>
             <build>
                 <plugins>
@@ -487,7 +347,6 @@
                 </plugins>
             </build>
         </profile>
-
         <profile>
             <id>generate-javadoc-and-source</id>
             <build>
@@ -553,137 +412,4 @@
             </build>
         </profile>
     </profiles>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>jakarta.annotation</groupId>
-                <artifactId>jakarta.annotation-api</artifactId>
-                <version>${jakarta.annotation-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>info.picocli</groupId>
-                <artifactId>picocli</artifactId>
-                <version>${picocli.verions}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jetbrains</groupId>
-                <artifactId>annotations</artifactId>
-                <version>${jetbrains.annotation.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j-api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>eu.oberon-oss.tools</groupId>
-                <artifactId>git-commit-in-log</artifactId>
-                <version>${git-commit-in-log.version}</version>
-            </dependency>
-            <!-- Dependencies for testing only -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit-jupiter.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit-jupiter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${junit-jupiter.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit-pioneer</groupId>
-                <artifactId>junit-pioneer</artifactId>
-                <version>${junit-pioneer.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-junit-jupiter</artifactId>
-                <version>${mockito-junit-jupiter.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.hakky54</groupId>
-                <artifactId>logcaptor</artifactId>
-                <version>${logcaptor.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj-core.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>eu.oberon-oss.tools</groupId>
-            <artifactId>git-commit-in-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-        </dependency>
-
-        <!-- Testing dependencies -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito-core.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>
