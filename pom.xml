@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>project-settings</artifactId>
-    <version>4.25.2</version>
+    <version>4.25.3</version>
     <packaging>pom</packaging>
 
     <name>Oberon OSS project-settings</name>

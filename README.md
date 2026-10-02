@@ -30,7 +30,7 @@ Add the following to your `pom.xml`:
 <parent>
     <groupId>eu.oberon-oss</groupId>
     <artifactId>project-settings-parent</artifactId>
-    <version>4.25.2</version>
+    <version>4.25.3</version>
 </parent>
 ```
 
@@ -58,7 +58,7 @@ into your `<dependencyManagement>` section:
         <dependency>
             <groupId>eu.oberon-oss</groupId>
             <artifactId>project-settings-bom</artifactId>
-            <version>4.25.2</version>
+            <version>4.25.3</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
