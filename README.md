@@ -20,17 +20,19 @@ This project provides two distinct artifacts:
 
 ### 1. As a Parent POM (Recommended for Oberon OSS projects)
 
-Inheriting from `project-settings-parent` provides complete build orchestration, including pre-configured compiler settings (Java 25,
+Inheriting from `project-settings-parent` provides complete build orchestration, including pre-configured compiler
+settings (Java 25,
 Lombok annotation processing), standard testing frameworks (JUnit 5, Mockito, AssertJ), code coverage (JaCoCo),
 repository distribution management, and automatically imports `project-settings-bom`.
 
 Add the following to your `pom.xml`:
 
 ```xml
+
 <parent>
     <groupId>eu.oberon-oss</groupId>
     <artifactId>project-settings-parent</artifactId>
-    <version>4.25.3</version>
+    <version>4.25.4</version>
 </parent>
 ```
 
@@ -39,7 +41,7 @@ Add the following to your `pom.xml`:
 - **Default Dependencies**: Automatically includes `org.jetbrains:annotations` (compile) and standard test dependencies
   (`junit-jupiter`, `mockito-core`, `mockito-junit-jupiter`, `assertj-core`).
 - **Dependency Management**: Automatically imports `eu.oberon-oss:project-settings-bom`.
-- **Compiler Configuration**: Configured for Java 25 source/target with Lombok annotation processor path enabled.
+- **Compiler Configuration**: Configured for Java 25 source/target with the Lombok annotation processor path enabled.
 - **Surefire / Test Runner**: Pre-configured with Mockito Java agent and JVM flags (`-Xshare:off`,
   `--sun-misc-unsafe-memory-access=allow`).
 - **Default Profiles**: JaCoCo agent and reporting enabled by default (`jacoco`), as well as distribution management for
@@ -49,16 +51,18 @@ Add the following to your `pom.xml`:
 
 ### 2. As an Imported BOM (Dependency Management)
 
-If you only want to align dependency versions without inheriting build plugins and parent configuration, import `project-settings-bom`
+If you only want to align dependency versions without inheriting build plugins and parent configuration, import
+`project-settings-bom`
 into your `<dependencyManagement>` section:
 
 ```xml
+
 <dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>eu.oberon-oss</groupId>
             <artifactId>project-settings-bom</artifactId>
-            <version>4.25.3</version>
+            <version>4.25.4</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -103,16 +107,17 @@ Then declare the dependencies you need without specifying versions:
 
 The repository is organized as a multi-module Maven project providing two distinct artifacts:
 
-| Artifact | Maven Coordinates | Purpose & Contents |
-|:---------|:------------------|:-------------------|
-| **BOM** | `eu.oberon-oss:project-settings-bom` | Standalone Bill of Materials providing library version management via `<dependencyManagement>`. |
+| Artifact       | Maven Coordinates                       | Purpose & Contents                                                                                                                              |
+|:---------------|:----------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
+| **BOM**        | `eu.oberon-oss:project-settings-bom`    | Standalone Bill of Materials providing library version management via `<dependencyManagement>`.                                                 |
 | **Parent POM** | `eu.oberon-oss:project-settings-parent` | Complete project parent providing build lifecycle plugins, compiler configuration, test agents, default dependencies, and automatic BOM import. |
 
 ---
 
 ## Managed Dependencies
 
-The `eu.oberon-oss:project-settings-bom` artifact manages versions for commonly used libraries across Oberon OSS projects:
+The `eu.oberon-oss:project-settings-bom` artifact manages versions for commonly used libraries across Oberon OSS
+projects:
 
 | Category            | Artifact                                    | Description                                            |
 |:--------------------|:--------------------------------------------|:-------------------------------------------------------|
@@ -133,28 +138,36 @@ The `eu.oberon-oss:project-settings-bom` artifact manages versions for commonly 
 
 ## Managed Plugins & Build Configuration
 
-The `eu.oberon-oss:project-settings-parent` POM (backed by root `<pluginManagement>`) configures essential build plugins:
+The `eu.oberon-oss:project-settings-parent` POM (backed by root `<pluginManagement>`) configures essential build
+plugins:
 
-- **Compiler**: `maven-compiler-plugin` configured for Java 25 with Lombok annotation processor path enabled.
-- **Testing**: `maven-surefire-plugin` with Mockito agent attachments and JVM execution flags (`-Xshare:off`, `--sun-misc-unsafe-memory-access=allow`).
+- **Compiler**: `maven-compiler-plugin` configured for Java 25 with the Lombok annotation processor path enabled.
+- **Testing**: `maven-surefire-plugin` with Mockito agent attachments and JVM execution flags (`-Xshare:off`,
+  `--sun-misc-unsafe-memory-access=allow`).
 - **Quality & Coverage**: `jacoco-maven-plugin` and `sonar-maven-plugin`.
-- **Enforcer**: `maven-enforcer-plugin` enforcing minimum Java 25, Maven 3.9, and banning duplicate POM dependency versions.
+- **Enforcer**: `maven-enforcer-plugin` enforcing minimum Java 25, Maven 3.9, and banning duplicate POM dependency
+  versions.
 - **Git Metadata**: `git-commit-id-maven-plugin` for build-time Git commit extraction.
-- **Packaging & Publishing**: `central-publishing-maven-plugin`, `maven-gpg-plugin`, `maven-source-plugin`, `maven-javadoc-plugin`, `maven-assembly-plugin`, and `versions-maven-plugin`.
+- **Packaging & Publishing**: `central-publishing-maven-plugin`, `maven-gpg-plugin`, `maven-source-plugin`,
+  `maven-javadoc-plugin`, `lombok-maven-plugin`, `maven-assembly-plugin`, and `versions-maven-plugin`.
 
 ---
 
 ## Maven Profiles
 
-| Profile ID                    | Provided In | Description                                                         | Default Status       |
-|:------------------------------|:------------|:--------------------------------------------------------------------|:---------------------|
-| `activate-oberon-nexus`       | Root / Parent | Configures distribution management for Oberon OSS Nexus repository. | Active by default    |
-| `jacoco`                      | Parent      | Configures JaCoCo agent and test reporting.                         | Active by default    |
-| `include-git-commit-data`     | Parent      | Generates `git.properties` and includes `git-commit-in-log`.        | Inactive (on demand) |
-| `activate-maven-central`      | Root        | Switches distribution management to Sonatype / Maven Central.       | Inactive (on demand) |
-| `central-release`             | Root        | Enables Central publishing plugin and GPG artifact signing.         | Inactive (on demand) |
-| `generate-javadoc-and-source` | Root        | Attaches Javadoc and source JARs to the build package phase.        | Inactive (on demand) |
-| `coverage`                    | Root        | Generates JaCoCo XML reports for CI/CD analysis (e.g. SonarCloud).  | Inactive (on demand) |
+All build and distribution profiles are defined in the root POM (`eu.oberon-oss:project-settings`) and inherited by
+`eu.oberon-oss:project-settings-parent`:
+
+| Profile ID                    | Description                                                         | Default Status       |
+|:------------------------------|:--------------------------------------------------------------------|:---------------------|
+| `activate-oberon-nexus`       | Configures distribution management for Oberon OSS Nexus repository. | Active by default    |
+| `jacoco`                      | Configures JaCoCo agent and test coverage reporting.                | Active by default    |
+| `include-git-commit-data`     | Generates `git.properties` and includes `git-commit-in-log`.        | Inactive (on demand) |
+| `activate-maven-central`      | Switches distribution management to Sonatype / Maven Central.       | Inactive (on demand) |
+| `central-release`             | Enables Central publishing plugin and GPG artifact signing.         | Inactive (on demand) |
+| `generate-javadoc-and-source` | Attaches Javadoc and source JARs to the build package phase.        | Inactive (on demand) |
+| `lombok`                      | Adds Lombok dependency and runs delombok for Javadoc generation.    | Inactive (on demand) |
+| `site`                        | Configures Maven Site plugin and report generation.                 | Inactive (on demand) |
 
 ---
 

@@ -6,10 +6,10 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>project-settings</artifactId>
-    <version>4.25.3</version>
+    <version>4.25.4</version>
     <packaging>pom</packaging>
 
-    <name>Oberon OSS project-settings</name>
+    <name>Oberon OSS Project Settings</name>
     <description>Root aggregator and parent for Oberon OSS BOM and Parent POM.</description>
     <url>https://github.com/oberon-oss/project-settings</url>
 
@@ -29,6 +29,7 @@
         <maven.compiler.proc>full</maven.compiler.proc>
 
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+        <maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
         <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
         <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
         <maven-artifact-plugin.version>3.7.0</maven-artifact-plugin.version>
@@ -46,6 +47,10 @@
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
         <git-commit-id-maven-plugin.version>10.0.1</git-commit-id-maven-plugin.version>
+        <git-commit-in-log.version>1.0.1</git-commit-in-log.version>
+        <lombok.version>1.18.48</lombok.version>
+        <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
+        <mockito-core.version>5.23.0</mockito-core.version>
 
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <sonar.organization>${github-organization-name}-eu</sonar.organization>
@@ -112,6 +117,25 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${maven-enforcer-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <banDuplicatePomDependencyVersions/>
+                                    <requireMavenVersion>
+                                        <version>[3.9,)</version>
+                                    </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <version>[25,)</version>
+                                    </requireJavaVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -129,16 +153,59 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <argLine>
+                            @{argLine}
+                            -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito-core.version}/mockito-core-${mockito-core.version}.jar
+                            -Xshare:off
+                            --sun-misc-unsafe-memory-access=allow
+                        </argLine>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                        <fork>true</fork>
+                        <compilerArgs>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+                            <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
+                    <configuration>
+                        <delimiters>
+                            <delimiter>@</delimiter>
+                        </delimiters>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -190,31 +257,24 @@
                     <artifactId>central-publishing-maven-plugin</artifactId>
                     <version>${central-publishing-maven-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok-maven-plugin</artifactId>
+                    <version>${lombok-maven-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <banDuplicatePomDependencyVersions/>
-                                <requireMavenVersion>
-                                    <version>[3.9,)</version>
-                                </requireMavenVersion>
-                                <requireJavaVersion>
-                                    <version>[25,)</version>
-                                </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -381,30 +441,129 @@
             </build>
         </profile>
         <profile>
-            <id>coverage</id>
+            <id>lombok</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                    <version>${lombok.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>delombok</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+                                    <outputDirectory>${project.build.directory}/delombok</outputDirectory>
+                                    <addOutputDirectory>false</addOutputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <!--suppress MavenModelInspection -->
+                            <sourcepath>${project.build.directory}/delombok</sourcepath>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>cleanup-delombok</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                                    <filesets>
+                                        <fileset>
+                                            <!--suppress MavenModelInspection -->
+                                            <directory>${project.build.directory}/delombok</directory>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>include-git-commit-data</id>
+            <dependencies>
+                <dependency>
+                    <groupId>eu.oberon-oss.tools</groupId>
+                    <artifactId>git-commit-in-log</artifactId>
+                    <version>${git-commit-in-log.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.github.git-commit-id</groupId>
+                        <artifactId>git-commit-id-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>get-the-git-infos</id>
+                                <goals>
+                                    <goal>revision</goal>
+                                </goals>
+                                <phase>initialize</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                            <includeOnlyProperties>
+                                <includeOnlyProperty>^git\.build\.time$</includeOnlyProperty>
+                                <includeOnlyProperty>^git\.build\.version$</includeOnlyProperty>
+                                <includeOnlyProperty>^git\.commit\.id\.(abbrev|full)$</includeOnlyProperty>
+                                <includeOnlyProperty>^git\.commit\.time$</includeOnlyProperty>
+                                <includeOnlyProperty>^git\.branch$</includeOnlyProperty>
+                                <includeOnlyProperty>^git\.tags$</includeOnlyProperty>
+                            </includeOnlyProperties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jacoco</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>${jacoco-maven-plugin.version}</version>
                         <executions>
                             <execution>
-                                <id>prepare-agent</id>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
                             </execution>
                             <execution>
                                 <id>report</id>
+                                <phase>test</phase>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
-                                <configuration>
-                                    <formats>
-                                        <format>XML</format>
-                                    </formats>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
