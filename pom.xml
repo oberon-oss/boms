@@ -6,7 +6,7 @@
 
     <groupId>eu.oberon-oss</groupId>
     <artifactId>project-settings</artifactId>
-    <version>4.25.4</version>
+    <version>4.25.5</version>
     <packaging>pom</packaging>
 
     <name>Oberon OSS Project Settings</name>
@@ -346,7 +346,7 @@
             </build>
         </profile>
         <profile>
-            <id>activate-oberon-nexus</id>
+            <id>deploy-to-nexus</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -362,9 +362,39 @@
                     <url>https://nexus.oberon-oss.eu/repository/maven-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-source</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
-            <id>activate-maven-central</id>
+            <id>deploy-to-maven-central</id>
             <distributionManagement>
                 <repository>
                     <id>central</id>
@@ -377,9 +407,6 @@
                     <url>https://central.sonatype.com/repository/maven-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
-        </profile>
-        <profile>
-            <id>central-release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -404,13 +431,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>generate-javadoc-and-source</id>
-            <build>
-                <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
